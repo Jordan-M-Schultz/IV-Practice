@@ -20,12 +20,14 @@ int main(int argv, char** argc){
 }
 
 void testUnique(){
-	string test = "abcdefg";
-	bool cc = checkUnique(test);
+	string test[4] = {"abcdefg","hello","caedfnkic",""};
+	for(int i = 0 ; i < 4 ; i++){
+		bool cc = checkUnique(test[i]);
 		if(!cc)
-			cout << "duplicate char found" << endl;
+			cout << "duplicate char found within " << test[i] << endl;
 		else
-			cout << "no duplicates found" << endl;
+			cout << "no duplicates found within " << test[i] << endl;
+	}//for
 }
 
 string reverse(string temp){
@@ -40,6 +42,12 @@ string reverse(string temp){
 
 bool checkUnique(string temp){
 	//Check if given string has unique characters throughout
+	if(!temp.length())
+	{
+		cout << "no given string ";
+		return false;
+	}
+
 	unordered_map<int,char> chars;
 	for(int i = 0 ;i < temp.length() ; i++){
 		unordered_map<int,char>::const_iterator it = chars.find(temp[i]);
