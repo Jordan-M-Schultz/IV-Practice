@@ -2,8 +2,9 @@
 #include <cstring>
 #include <string>
 #include <stdio.h>
+#include <unordered_map> // <Key,Val>
 
-using namespace std;
+using namespace std; //Dont do this in practice
 typedef struct {
 	int nice;
 	char* hello;
@@ -11,10 +12,20 @@ typedef struct {
 }data;
 
 string reverse(string temp);
-
-int main(int argv, char* argv){
-
+bool checkUnique(string temp);
+void testUnique();
+int main(int argv, char** argc){
+	testUnique();
 	return 0;
+}
+
+void testUnique(){
+	string test = "abcdefg";
+	bool cc = checkUnique(test);
+		if(!cc)
+			cout << "duplicate char found" << endl;
+		else
+			cout << "no duplicates found" << endl;
 }
 
 string reverse(string temp){
@@ -26,3 +37,18 @@ string reverse(string temp){
 	return back;
 
 } //reverse
+
+bool checkUnique(string temp){
+	//Check if given string has unique characters throughout
+	unordered_map<int,char> chars;
+	for(int i = 0 ;i < temp.length() ; i++){
+		unordered_map<int,char>::const_iterator it = chars.find(temp[i]);
+		if(it == chars.end()) // not found
+			//chars.insert({(int)temp[i],temp[i]});
+			chars.insert(make_pair((int)temp[i],temp[i]));
+		else
+			return false;
+	}//for
+		return true;
+
+}
