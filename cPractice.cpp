@@ -3,28 +3,74 @@
 #include <string>
 #include <stdio.h>
 #include <unordered_map> // <Key,Val>
+#include <vector> 
+#include <array>
+#include <stack>
 
 using namespace std; //Dont do this in practice
 typedef struct {
 	int nice;
-	char* hello;
+	char hello;
 	//allocation of 
 }data;
 
+struct data2{
+	int nice;
+	char hello;
+};
+
+
+void matrixRotate(int old[][3]);
 string reverse(string temp);
 bool checkUnique(string temp);
 void testUnique();
 string reverse2(string temp);
 bool checkPermutation(string a, string b);
+string replace(string a);
+void printMatrix(int temp[][3], int size);
+
+
 
 int main(int argv, char** argc){
 	//testUnique();
-	string a = "hello";
-	string b = "hello";
-	cout << checkPermutation(a,b) << endl;
+	data* a1 = new data;
+	a1->nice = 5;
+	a1->hello = 'c';
 
+	data2 a2;
+	a2.nice=5;
+	a2.hello = 'c';
 	return 0;
 }
+
+void matrixRotate(int old[][3]){ //given old matrix, rotate by 90 degrees
+	int ret[3][3]; 
+	
+	//int ** array = new int*[5]; //5 rows
+	//for(int i = 0 ; i < 5 ; i++)
+	//	array[i] = new int[3]; //3 columns, use new over malloc.
+
+
+	for(int row = 0 ; row < 3; row++){
+		for(int col = 0 ; col < 3 ; col++){
+			//ret[row][col] = old[col][3-row-1]; //counter clockwise
+			ret[row][col] = old[3-col-1][row]; //clockwise
+		}
+	}
+	printMatrix(ret,3);
+	
+}
+
+void printMatrix(int temp[][3], int size){
+	for(int i = 0 ; i < size ; i++)
+	{
+		cout << endl;
+		for(int j = 0 ; j < size ; j++)
+			cout << temp[i][j];
+	}
+	cout << endl;
+}
+
 
 bool checkPermutation(string a, string b){
 	if(a.length() == 0 || b.length() == 0) //if empty string
